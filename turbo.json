@@ -9,6 +9,10 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
-    "lint": {}
+    "lint": {},
+    "web": {
+      "cache": false,
+      "persistent": true
+    }
   }
 }

@@ -5,7 +5,8 @@
   "scripts": {
     "build": "turbo run build",
     "start": "turbo run start",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "web": "turbo run web --filter=./apps/public-app"
   },
   "devDependencies": {
     "turbo": "latest"
