@@ -1,0 +1,5 @@
+import { AppNavigator } from "@app/ui";
+
+export default function App() {
+  return <AppNavigator />;
+}
