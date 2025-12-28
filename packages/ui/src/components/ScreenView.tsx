@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
+import { View } from "react-native";
 import {
   screenStyle,
   scrollContainerStyle,

@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@app/core": "workspace:*",
     "@app/ui": "workspace:*",
     "@expo-google-fonts/dm-mono": "^0.4.2",
     "@expo-google-fonts/ubuntu": "^0.4.1",
@@ -17,6 +18,7 @@
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
     "react-native": "0.81.5",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-svg": "15.12.1"
   },
   "devDependencies": {

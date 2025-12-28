@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Toast from "react-native-toast-message";
+import { toastConfig } from "../utils";
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationOptions,
+} from "@react-navigation/native-stack";
 import { LobbyScreen, AuthScreen } from "@app/ui/screens";
 import { colors, typography } from "@app/ui/theme";
 import {
@@ -20,8 +25,8 @@ interface AppNavigatorProps {
   logic?: AppLogic;
 }
 
-export default function AppNavigator() {
-  let [fontsLoaded] = useFonts({
+export default function AppNavigator({ children, logic }: AppNavigatorProps) {
+  const [fontsLoaded] = useFonts({
     DMMono_400Regular,
     DMMono_500Medium,
     Ubuntu_400Regular,
