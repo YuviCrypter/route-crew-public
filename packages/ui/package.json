@@ -13,8 +13,13 @@
   },
   "dependencies": {
     "@app/core": "workspace:*",
-    "zod": "^3.23.8",
+    "@hookform/resolvers": "^3.4.2",
     "react-hook-form": "^7.51.5",
-    "@hookform/resolvers": "^3.4.2"
+    "react-native-toast-message": "^2.3.3",
+    "zod": "^3.23.8"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./components": "./src/components/index.ts"
   }
 }

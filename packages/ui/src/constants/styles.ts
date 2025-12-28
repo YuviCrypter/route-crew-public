@@ -12,7 +12,7 @@ export const screenStyle: ViewStyle = {
 export const scrollStyle: ViewStyle = {
   width: "100%",
   borderRadius: borderRadius["2xl"],
-  borderTopWidth: 1,
+  borderWidth: 1,
   borderColor: colors.fadedDark,
 };
 

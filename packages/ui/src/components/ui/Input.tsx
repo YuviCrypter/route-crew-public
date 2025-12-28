@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   inputField: {
     borderRadius: borderRadius.md,
     gap: spacing.xs,
-    paddingVertical: spacing.sm,
+    paddingVertical: spacing.xs,
     paddingHorizontal: spacing.md,
     backgroundColor: colors.inputBackground,
     borderWidth: 1,

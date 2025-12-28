@@ -31,6 +31,7 @@ export const colors = {
   // Status colors
   error: "#ff5722",
   warning: "#F59E0B",
+  success: "#0FFF37",
 };
 
 // Typography
@@ -39,36 +40,43 @@ export const typography: Record<string, TextStyle> = {
     fontSize: 32,
     fontFamily: "Ubuntu_700Bold",
     color: colors.text,
+    fontWeight: 700,
   },
   h2: {
     fontSize: 28,
     fontFamily: "Ubuntu_700Bold",
     color: colors.text,
+    fontWeight: 700,
   },
   h3: {
     fontSize: 24,
     fontFamily: "Ubuntu_700Bold",
     color: colors.text,
+    fontWeight: 700,
   },
   h4: {
     fontSize: 20,
     fontFamily: "Ubuntu_700Bold",
     color: colors.text,
+    fontWeight: 700,
   },
   base: {
     fontSize: 16,
     fontFamily: "Ubuntu_400Regular",
     color: colors.text,
+    fontWeight: 400,
   },
   small: {
     fontSize: 14,
     color: colors.text,
     fontFamily: "DMMono_400Regular",
+    fontWeight: 400,
   },
   label: {
     fontSize: 12,
     color: colors.text,
     fontFamily: "DMMono_500Medium",
+    fontWeight: 500,
   },
 };
 

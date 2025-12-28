@@ -6,7 +6,7 @@ import {
   ViewStyle,
   TextStyle,
 } from "react-native";
-import { colors, typography, shadows } from "@app/ui/theme/constants";
+import { colors, typography, shadows, spacing } from "@app/ui/theme/constants";
 
 type ButtonVariant = "primary" | "secondary" | "link";
 
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
     width: 256,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
     borderWidth: 1,
     borderBottomWidth: 0,
     borderRadius: 6,

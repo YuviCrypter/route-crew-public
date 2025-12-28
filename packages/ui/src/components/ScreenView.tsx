@@ -1,11 +1,12 @@
 import React, { ReactNode } from "react";
-import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
+import { View } from "react-native";
 import {
   screenStyle,
   scrollContainerStyle,
   scrollStyle,
 } from "@app/ui/constants/styles";
 import { useHeaderHeight } from "@react-navigation/elements";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 interface ScreenViewProps {
   children: React.ReactElement;
@@ -16,12 +17,11 @@ export default function ScreenView({ children, Header }: ScreenViewProps) {
   const headerHeight = useHeaderHeight();
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={screenStyle}
-    >
+    <View style={screenStyle}>
       <View style={[{ marginTop: headerHeight }]}>{Header && <Header />}</View>
-      <ScrollView
+      <KeyboardAwareScrollView
+        extraHeight={100}
+        enableOnAndroid
         style={[
           scrollStyle,
           {
@@ -33,7 +33,7 @@ export default function ScreenView({ children, Header }: ScreenViewProps) {
         showsVerticalScrollIndicator={false}
       >
         {children}
-      </ScrollView>
-    </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
+    </View>
   );
 }

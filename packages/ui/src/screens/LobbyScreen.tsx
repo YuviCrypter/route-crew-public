@@ -2,19 +2,21 @@ import { View, Text, StyleSheet } from "react-native";
 import { useState } from "react";
 import { Button, Input, ScreenView } from "@app/ui/components";
 import { colors, spacing, typography } from "@app/ui/theme/constants";
+import { useNavigation } from "@react-navigation/native";
+import { useLogic } from "@app/core";
 
 export default function LobbyScreen() {
   const [roomName, setRoomName] = useState("");
   const [roomCode, setRoomCode] = useState("");
+  const navigation = useNavigation<any>();
+  const { lobby } = useLogic();
 
   const handleCreateRoom = () => {
-    console.log("Creating room:", roomName);
-    // TODO: Implement room creation logic
+    lobby.createRoom(roomName, navigation);
   };
 
   const handleJoinRoom = () => {
-    console.log("Joining room:", roomCode);
-    // TODO: Implement room joining logic
+    lobby.joinRoom(roomCode, navigation);
   };
 
   return (

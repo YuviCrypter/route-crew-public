@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@app/ui": "workspace:*",
+    "@app/core": "workspace:*",
     "@expo-google-fonts/dm-mono": "^0.4.2",
     "@expo-google-fonts/ubuntu": "^0.4.1",
     "expo": "~54.0.30",

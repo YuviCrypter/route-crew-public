@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema, LoginInput, SignUpInput, SignUpSchema } from "@app/core";
+import { LoginSchema, LoginInput, SignUpSchema, SignUpInput } from "@app/core";
 import { Button, Input, ScreenView } from "@app/ui/components";
 import { colors, typography, spacing } from "@app/ui/theme/constants";
 import { useMemo, useState } from "react";
@@ -16,7 +16,7 @@ export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
 
   const schema = useMemo(
     () => (tab === "sign-up" ? SignUpSchema : LoginSchema),
-    [tab]
+    [tab],
   );
 
   const {
@@ -78,7 +78,6 @@ export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
     <ScreenView Header={HeaderTab}>
       <View style={styles.content}>
         <View style={styles.bgDesign}>
-          {/* <MapsBG /> */}
           <Image
             source={require("../../assets/images/IsometricBG.png")}
             style={{ height: 420, width: 755 }}
@@ -90,6 +89,7 @@ export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
             Your journey continues from here.
           </Text>
         </View>
+
         <View style={styles.form}>
           <Controller
             control={control}
@@ -149,8 +149,8 @@ export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
                   ? "Signing in..."
                   : "Sign in"
                 : isSubmitting
-                ? "Signing up..."
-                : "Sign up"
+                  ? "Signing up..."
+                  : "Sign up"
             }
             onPress={handleSubmit(tab === "sign-in" ? onSignIn : onSignUp)}
             disabled={isSubmitting}
