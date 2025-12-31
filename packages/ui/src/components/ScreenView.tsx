@@ -4,9 +4,9 @@ import {
   screenStyle,
   scrollContainerStyle,
   scrollStyle,
-} from "@app/ui/constants/styles";
-import { useHeaderHeight } from "@react-navigation/elements";
+} from "@app/ui/common/styles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface ScreenViewProps {
   children: React.ReactElement;
@@ -14,26 +14,18 @@ interface ScreenViewProps {
 }
 
 export default function ScreenView({ children, Header }: ScreenViewProps) {
-  const headerHeight = useHeaderHeight();
-
   return (
-    <View style={screenStyle}>
-      <View style={[{ marginTop: headerHeight }]}>{Header && <Header />}</View>
+    <SafeAreaView style={[screenStyle]} edges={["bottom"]}>
+      <View style={{ marginTop: 0 }}>{Header && <Header />}</View>
       <KeyboardAwareScrollView
-        extraHeight={100}
+        extraHeight={64}
         enableOnAndroid
-        style={[
-          scrollStyle,
-          {
-            borderBottomLeftRadius: 0,
-            borderBottomRightRadius: 0,
-          },
-        ]}
+        style={[scrollStyle]}
         contentContainerStyle={scrollContainerStyle}
         showsVerticalScrollIndicator={false}
       >
         {children}
       </KeyboardAwareScrollView>
-    </View>
+    </SafeAreaView>
   );
 }

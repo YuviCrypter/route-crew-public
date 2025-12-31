@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useState } from "react";
 import { Button, Input, ScreenView } from "@app/ui/components";
-import { colors, spacing, typography } from "@app/ui/theme/constants";
+import { colors, spacing, typography } from "@app/ui/theme";
 import { useNavigation } from "@react-navigation/native";
 import { useLogic } from "@app/core";
 

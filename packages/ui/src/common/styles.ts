@@ -1,12 +1,12 @@
 import { ViewStyle } from "react-native";
-import { borderRadius, colors } from "@app/ui/theme/constants";
+import { borderRadius, colors } from "@app/ui/theme";
 
 export const screenStyle: ViewStyle = {
   flex: 1,
   backgroundColor: colors.background,
   alignItems: "center",
   justifyContent: "center",
-  paddingTop: 0,
+  position: "relative",
 };
 
 export const scrollStyle: ViewStyle = {

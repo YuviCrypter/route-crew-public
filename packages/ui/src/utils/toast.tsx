@@ -4,7 +4,7 @@ import Toast, {
   ErrorToast,
   ToastConfig,
 } from "react-native-toast-message";
-import { colors, spacing, typography } from "../theme/constants";
+import { colors, spacing, typography } from "../theme";
 
 type ToastType = "success" | "error" | "info";
 

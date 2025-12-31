@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { colors } from "@app/ui/theme/constants";
+import { colors } from "@app/ui/theme";
 
 export default function Header() {
   const route = useRoute();

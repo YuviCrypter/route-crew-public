@@ -7,7 +7,7 @@ import {
   NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
 import { LobbyScreen, AuthScreen } from "@app/ui/screens";
-import { colors, typography } from "@app/ui/theme/constants";
+import { colors, typography } from "@app/ui/theme";
 import {
   useFonts,
   DMMono_400Regular,
@@ -16,6 +16,7 @@ import {
 import { Ubuntu_400Regular, Ubuntu_700Bold } from "@expo-google-fonts/ubuntu";
 import { LoaderScreen } from "@app/ui/components";
 import { AppLogic, LogicProvider } from "@app/core";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export const Stack = createNativeStackNavigator();
 
@@ -33,44 +34,46 @@ export default function AppNavigator({ children, logic }: AppNavigatorProps) {
   });
 
   // dummy session
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   if (!fontsLoaded) {
     return <LoaderScreen />;
   }
 
   return (
-    <LogicProvider value={logic}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerTitleAlign: "center",
-            headerBlurEffect: "dark",
-            headerTransparent: true,
-            headerTitleStyle: { ...typography.label, color: colors.text },
-          }}
-        >
-          {isLoggedIn ? (
-            <Stack.Group>
-              <Stack.Screen name="Lobby" component={LobbyScreen} />
-              {children}
-            </Stack.Group>
-          ) : (
-            <Stack.Group>
-              <Stack.Screen name="Welcome">
-                {(props) => (
-                  <AuthScreen
-                    {...props}
-                    onLogin={() => setIsLoggedIn(true)}
-                    onRegister={() => {}}
-                  />
-                )}
-              </Stack.Screen>
-            </Stack.Group>
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
-      <Toast config={toastConfig} />
-    </LogicProvider>
+    <SafeAreaProvider>
+      <LogicProvider value={logic}>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerTitleAlign: "center",
+              headerShadowVisible: false,
+              headerStyle: { backgroundColor: colors.background },
+              headerTitleStyle: { ...typography.label, color: colors.text },
+            }}
+          >
+            {isLoggedIn ? (
+              <Stack.Group>
+                <Stack.Screen name="Lobby" component={LobbyScreen} />
+                {children}
+              </Stack.Group>
+            ) : (
+              <Stack.Group>
+                <Stack.Screen name="Welcome">
+                  {(props) => (
+                    <AuthScreen
+                      {...props}
+                      onLogin={() => setIsLoggedIn(true)}
+                      onRegister={() => {}}
+                    />
+                  )}
+                </Stack.Screen>
+              </Stack.Group>
+            )}
+          </Stack.Navigator>
+        </NavigationContainer>
+        <Toast config={toastConfig} />
+      </LogicProvider>
+    </SafeAreaProvider>
   );
 }

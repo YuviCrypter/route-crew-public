@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema, LoginInput, SignUpSchema, SignUpInput } from "@app/core";
 import { Button, Input, ScreenView } from "@app/ui/components";
-import { colors, typography, spacing } from "@app/ui/theme/constants";
+import { colors, typography, spacing } from "@app/ui/theme";
 import { useMemo, useState } from "react";
 
 interface AuthScreenProps {
@@ -16,7 +16,7 @@ export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
 
   const schema = useMemo(
     () => (tab === "sign-up" ? SignUpSchema : LoginSchema),
-    [tab],
+    [tab]
   );
 
   const {

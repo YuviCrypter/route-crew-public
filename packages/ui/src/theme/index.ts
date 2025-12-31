@@ -1,5 +1,1 @@
-import * as constants from "./constants";
-
-export const theme = {
-  ...constants,
-};
+export * from "./constants";
