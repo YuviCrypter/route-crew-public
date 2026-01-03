@@ -5,6 +5,7 @@ const projectRoot = __dirname;
 const workspaceRoot = path.resolve(projectRoot, "../..");
 
 const config = getDefaultConfig(projectRoot);
+config.resolver.unstable_enablePackageExports = true;
 
 // 1. Watch the whole workspace (so it sees packages/ui)
 config.watchFolders = [workspaceRoot, ...config.watchFolders];

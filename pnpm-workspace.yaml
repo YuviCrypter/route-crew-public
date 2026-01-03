@@ -2,4 +2,9 @@ packages:
   - apps/*
   - packages/*
 
+ignoredBuiltDependencies:
+  - "@prisma/engines"
+  - prisma
+  - styled-components
+
 nodeLinker: hoisted
