@@ -37,11 +37,7 @@ export default function Input({
           {...textInputProps}
         />
       </View>
-      {error && (
-        <Text style={[typography.small, styles.errorText, errorStyle]}>
-          {error}
-        </Text>
-      )}
+      {error && <Text style={[typography.small, styles.errorText, errorStyle]}>{error}</Text>}
     </View>
   );
 }

@@ -1,83 +1,51 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema, LoginInput, SignUpSchema, SignUpInput } from "@app/core";
+import { LoginSchema, LoginInput } from "@app/core/auth";
 import { Button, Input, ScreenView } from "@app/ui/components";
 import { colors, typography, spacing } from "@app/ui/theme";
 import { useMemo, useState } from "react";
+import { authClient } from "../lib/auth-client";
 
 interface AuthScreenProps {
   onLogin: () => void;
-  onRegister: () => void;
 }
 
-export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
-  const [tab, setTab] = useState<"sign-in" | "sign-up">("sign-in");
-
-  const schema = useMemo(
-    () => (tab === "sign-up" ? SignUpSchema : LoginSchema),
-    [tab]
-  );
-
+export default function AuthScreen({ onLogin }: AuthScreenProps) {
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignUpInput>({
-    resolver: zodResolver(schema),
+  } = useForm<LoginInput>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
-  const onSignIn = async (data: LoginInput) => {
+  const schema = useMemo(() => (tab === "sign-up" ? SignUpSchema : LoginSchema), [tab]);
+  const onSubmit = async (data: LoginInput) => {
     console.log("Login data:", data);
+    try {
+      const response = await authClient.signIn.email({
+        email: data.email,
+        password: data.password,
+      });
+      console.log("backend better-auth response: ", response);
+    } catch (error) {
+      console.log("erorr: ", error);
+    }
 
     //TODO: Implement Login logic
-    onLogin();
+    // onLogin();
   };
-
-  const onSignUp = async (data: LoginInput) => {
-    console.log("Register data:", data);
-
-    onRegister();
-  };
-
-  function HeaderTab() {
-    return (
-      <View style={styles.tab}>
-        <Button
-          title="Sign in"
-          onPress={() => setTab("sign-in")}
-          variant="link"
-          style={{ padding: 0 }}
-          textStyle={tab === "sign-in" ? { color: colors.brand } : {}}
-        />
-        <View
-          style={{
-            height: 4,
-            width: 4,
-            backgroundColor: colors.text,
-            borderRadius: 4,
-          }}
-        />
-        <Button
-          title="Sign up"
-          onPress={() => setTab("sign-up")}
-          variant="link"
-          style={{ padding: 0 }}
-          textStyle={tab === "sign-up" ? { color: colors.brand } : {}}
-        />
-      </View>
-    );
-  }
 
   return (
-    <ScreenView Header={HeaderTab}>
+    <ScreenView>
       <View style={styles.content}>
         <View style={styles.bgDesign}>
+          {/* <MapsBG /> */}
           <Image
             source={require("../../assets/images/IsometricBG.png")}
             style={{ height: 420, width: 755 }}
@@ -89,7 +57,6 @@ export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
             Your journey continues from here.
           </Text>
         </View>
-
         <View style={styles.form}>
           <Controller
             control={control}
@@ -124,35 +91,9 @@ export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
             )}
           />
 
-          {tab === "sign-up" && (
-            <Controller
-              control={control}
-              name="confirmPassword"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  label="Confirm Password"
-                  placeholder="Confirm your password"
-                  value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  error={errors.confirmPassword?.message}
-                  secureTextEntry
-                />
-              )}
-            />
-          )}
-
           <Button
-            title={
-              tab === "sign-in"
-                ? isSubmitting
-                  ? "Signing in..."
-                  : "Sign in"
-                : isSubmitting
-                  ? "Signing up..."
-                  : "Sign up"
-            }
-            onPress={handleSubmit(tab === "sign-in" ? onSignIn : onSignUp)}
+            title={isSubmitting ? "Logging in..." : "Login"}
+            onPress={handleSubmit(onSubmit)}
             disabled={isSubmitting}
             loading={isSubmitting}
             fullWidth
@@ -185,12 +126,5 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  },
-  tab: {
-    flexDirection: "row",
-    alignItems: "center",
-    textTransform: "uppercase",
-    gap: 16,
-    marginBottom: 8,
   },
 });
