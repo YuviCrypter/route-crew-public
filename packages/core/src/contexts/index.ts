@@ -1,1 +1,1 @@
-export * from "./LogicContext"
+export * from "./LogicContext";

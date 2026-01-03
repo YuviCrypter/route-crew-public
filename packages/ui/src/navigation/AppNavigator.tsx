@@ -8,11 +8,7 @@ import {
 } from "@react-navigation/native-stack";
 import { LobbyScreen, AuthScreen } from "@app/ui/screens";
 import { colors, typography } from "@app/ui/theme";
-import {
-  useFonts,
-  DMMono_400Regular,
-  DMMono_500Medium,
-} from "@expo-google-fonts/dm-mono";
+import { useFonts, DMMono_400Regular, DMMono_500Medium } from "@expo-google-fonts/dm-mono";
 import { Ubuntu_400Regular, Ubuntu_700Bold } from "@expo-google-fonts/ubuntu";
 import { LoaderScreen } from "@app/ui/components";
 import { AppLogic, LogicProvider } from "@app/core";
