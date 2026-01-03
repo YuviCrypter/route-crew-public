@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@/*": ["./*"],
+      "@app/ui": ["../../packages/ui/src/index.ts"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}
