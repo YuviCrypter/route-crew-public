@@ -1,19 +1,16 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema, LoginInput } from "@app/core/auth";
-import { Button, Input, ScreenView } from "@app/ui/components";
-import { colors, typography, spacing } from "@app/ui/theme";
+import { LoginSchema, LoginInput, SignUpSchema, SignUpInput } from "@app/core/auth";
+import { Button, Input, ScreenView } from "../components";
+import { colors, typography, spacing } from "../theme";
 import { useMemo, useState } from "react";
-import EmailIcon from "@app/ui/icons/EmailIcon";
-import LockIcon from "@app/ui/icons/LockIcon";
+import EmailIcon from "../icons/EmailIcon";
+import LockIcon from "../icons/LockIcon";
 import { authClient } from "../lib/auth-client";
+import { safeAuth } from "../utils";
 
-interface AuthScreenProps {
-  onLogin: () => void;
-}
-
-export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
+export default function AuthScreen() {
   const [tab, setTab] = useState<"sign-in" | "sign-up">("sign-in");
 
   const schema = useMemo(() => (tab === "sign-up" ? SignUpSchema : LoginSchema), [tab]);
@@ -22,35 +19,35 @@ export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginInput>({
-    resolver: zodResolver(LoginSchema),
+  } = useForm<SignUpInput>({
+    resolver: zodResolver(schema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  const schema = useMemo(() => (tab === "sign-up" ? SignUpSchema : LoginSchema), [tab]);
-  const onSubmit = async (data: LoginInput) => {
-    console.log("Login data:", data);
-    try {
-      const response = await authClient.signIn.email({
+  const onLogin = async (data: LoginInput) => {
+    await safeAuth(
+      authClient.signIn.email({
         email: data.email,
         password: data.password,
-      });
-      console.log("backend better-auth response: ", response);
-    } catch (error) {
-      console.log("erorr: ", error);
-    }
-
-    //TODO: Implement Login logic
-    // onLogin();
+      }),
+      "Failed to sign in"
+    );
   };
 
-  const onSignUp = async (data: LoginInput) => {
-    console.log("Register data:", data);
-
-    onRegister();
+  const onRegister = async (data: SignUpInput) => {
+    await safeAuth(
+      authClient.signUp.email({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      }),
+      "Failed to sign up"
+    );
   };
 
   function HeaderTab() {
@@ -83,7 +80,7 @@ export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
   }
 
   return (
-    <ScreenView>
+    <ScreenView Header={HeaderTab}>
       <View style={styles.content}>
         <View style={styles.bgDesign}>
           {/* <MapsBG /> */}
@@ -99,6 +96,24 @@ export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
           </Text>
         </View>
         <View style={styles.form}>
+          {tab === "sign-up" && (
+            <Controller
+              control={control}
+              name="name"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  label="Name"
+                  placeholder="Enter your name"
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  error={errors.name?.message}
+                  textContentType="name"
+                />
+              )}
+            />
+          )}
+
           <Controller
             control={control}
             name="email"
@@ -156,7 +171,7 @@ export default function AuthScreen({ onLogin, onRegister }: AuthScreenProps) {
 
           <Button
             title={isSubmitting ? "Logging in..." : "Login"}
-            onPress={handleSubmit(onSubmit)}
+            onPress={handleSubmit(tab === "sign-in" ? onLogin : onRegister)}
             disabled={isSubmitting}
             loading={isSubmitting}
             fullWidth
@@ -189,5 +204,12 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  tab: {
+    flexDirection: "row",
+    alignItems: "center",
+    textTransform: "uppercase",
+    gap: 16,
+    marginBottom: 8,
   },
 });

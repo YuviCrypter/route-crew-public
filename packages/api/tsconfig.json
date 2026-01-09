@@ -14,7 +14,7 @@
     "esModuleInterop": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@app/core/*": ["./src/*"]
+      "@app/api/*": ["./src/*"]
     }
   },
   "exclude": ["node_modules", "dist"]

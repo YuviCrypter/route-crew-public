@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@app/core": "workspace:*",
+    "@app/config": "workspace:*",
     "@better-auth/expo": "^1.4.9",
     "@hookform/resolvers": "^3.4.2",
     "@react-navigation/elements": "^2.9.3",
@@ -25,15 +26,15 @@
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-reanimated": "4.1.6",
     "react-native-toast-message": "^2.3.3",
-    "zod": "^3.23.8",
-    "react-native-reanimated": "4.1.6",
-    "react-native-keyboard-aware-scroll-view": "^0.9.5"
+    "zod": "^3.23.8"
   },
   "exports": {
     ".": "./src/index.ts",
     "./components": "./src/components/index.ts",
     "./theme": "./src/theme/index.ts",
     "./screens": "./src/screens/index.ts",
-    "./icons/*": "./src/icons/*"
+    "./icons/*": "./src/icons/*",
+    "./utils": "./src/utils/index.ts",
+    "./*": "./src/*"
   }
 }
