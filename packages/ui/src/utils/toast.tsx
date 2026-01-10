@@ -29,7 +29,7 @@ const showToast =
 const baseStyle: BaseToastProps = {
   contentContainerStyle: {
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    paddingVertical: spacing.xs,
   },
   text1Style: typography.base,
 };

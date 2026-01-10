@@ -2,8 +2,10 @@
 
 ## How to start
 
-1. Run `pnpm run start` on root directory to start in metro
-2. Run `pnpm run web` on root directory to start in web
+1. Run `pnpm run setup:app` to set up app environment variables (creates a symlink from root `.env` to `apps/public-app/.env`)
+2. Run `pnpm run setup:server` to set up server environment (runs prisma generate and migrations)
+3. Run `pnpm run start` on root directory to start in metro
+4. Run `pnpm run web` on root directory to start in web
 
 ## Rules
 

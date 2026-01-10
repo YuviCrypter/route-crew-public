@@ -6,7 +6,11 @@
     "build": "turbo run build",
     "start": "turbo run start",
     "lint": "turbo run lint",
-    "web": "turbo run web --filter=./apps/public-app",
+    "dev:app": "turbo run start --filter=./apps/public-app",
+    "dev:server": "turbo run start --filter=./apps/public-backend",
+    "dev:web": "turbo run web --filter=./apps/public-app",
+    "setup:app": "[ -f .env ] || (cp .env.example .env && echo 'Created .env from .env.example. PLEASE UPDATE IT.'); ln -sf ../../.env ./apps/public-app/.env",
+    "setup:server": "node --env-file=.env ./node_modules/.bin/prisma generate --config ./packages/core/prisma.config.ts && node --env-file=.env ./node_modules/.bin/prisma migrate dev --config ./packages/core/prisma.config.ts",
     "prepare": "husky"
   },
   "pnpm": {

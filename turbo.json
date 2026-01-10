@@ -1,9 +1,11 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
   "tasks": {
     "start": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "interactive": true
     },
     "build": {
       "dependsOn": ["^build"],
@@ -12,7 +14,8 @@
     "lint": {},
     "web": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "interactive": true
     }
   }
 }

@@ -1,6 +1,7 @@
 {
   "name": "@app/core",
   "version": "1.0.0",
+  "type": "module",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "devDependencies": {
@@ -9,10 +10,15 @@
     "typescript": "~5.9.2"
   },
   "dependencies": {
+    "@app/config": "workspace:*",
     "@prisma/client": "^7.2.0",
+    "react-native-styled-toast": "^1.3.1",
     "zod": "^3.23.8"
   },
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./client": "./src/db/index.ts",
+    "./auth": "./src/schemas/auth.ts",
+    "./*": "./src/*"
   }
 }

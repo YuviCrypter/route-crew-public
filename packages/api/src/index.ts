@@ -1,9 +1,8 @@
 import { Hono } from "hono";
-import { usersController } from "./modules/users/users.controller";
+import authcontroller from "./modules/auth/auth.controller.js";
 
 export const publicAPI = new Hono();
 
-publicAPI.route("/users", usersController);
+publicAPI.get("/health", (c) => c.text("OK"));
 
-const test = new Hono();
-test.router;
+publicAPI.route("/", authcontroller);
