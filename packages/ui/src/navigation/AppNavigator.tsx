@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "../utils";
@@ -6,17 +5,14 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
-import { LobbyScreen, AuthScreen } from "@app/ui/screens";
-import { colors, typography } from "@app/ui/theme";
-import {
-  useFonts,
-  DMMono_400Regular,
-  DMMono_500Medium,
-} from "@expo-google-fonts/dm-mono";
+import { LobbyScreen, AuthScreen } from "../screens";
+import { colors, typography } from "../theme";
+import { useFonts, DMMono_400Regular, DMMono_500Medium } from "@expo-google-fonts/dm-mono";
 import { Ubuntu_400Regular, Ubuntu_700Bold } from "@expo-google-fonts/ubuntu";
-import { LoaderScreen } from "@app/ui/components";
+import { LoaderScreen } from "../components";
 import { AppLogic, LogicProvider } from "@app/core";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { authClient } from "../lib/auth-client";
 
 export const Stack = createNativeStackNavigator();
 
@@ -33,12 +29,13 @@ export default function AppNavigator({ children, logic }: AppNavigatorProps) {
     Ubuntu_700Bold,
   });
 
-  // dummy session
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { data: userSession, isPending } = authClient.useSession();
 
-  if (!fontsLoaded) {
+  if (!fontsLoaded || isPending) {
     return <LoaderScreen />;
   }
+
+  const isLoggedIn = !!userSession;
 
   return (
     <SafeAreaProvider>
@@ -59,15 +56,7 @@ export default function AppNavigator({ children, logic }: AppNavigatorProps) {
               </Stack.Group>
             ) : (
               <Stack.Group>
-                <Stack.Screen name="Welcome">
-                  {(props) => (
-                    <AuthScreen
-                      {...props}
-                      onLogin={() => setIsLoggedIn(true)}
-                      onRegister={() => {}}
-                    />
-                  )}
-                </Stack.Screen>
+                <Stack.Screen name="Welcome" component={AuthScreen} />
               </Stack.Group>
             )}
           </Stack.Navigator>

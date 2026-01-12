@@ -4,6 +4,7 @@ import { Button, Input, ScreenView } from "@app/ui/components";
 import { colors, spacing, typography } from "@app/ui/theme";
 import { useNavigation } from "@react-navigation/native";
 import { useLogic } from "@app/core";
+import { authClient } from "../lib/auth-client";
 
 export default function LobbyScreen() {
   const [roomName, setRoomName] = useState("");
@@ -69,6 +70,8 @@ export default function LobbyScreen() {
             disabled={!roomCode.trim()}
           />
         </View>
+
+        <Button title="Logout" onPress={() => authClient.signOut()} variant="secondary" fullWidth />
       </View>
     </ScreenView>
   );

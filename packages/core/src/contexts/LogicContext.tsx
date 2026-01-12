@@ -10,11 +10,11 @@ export interface AppLogic {
 }
 
 const LogicContext = createContext<AppLogic | undefined>({
-    lobby: {
-      createRoom: (name, navigation) => console.log("Default create room:", name),
-      joinRoom: (code, navigation) => console.log("Default join room:", code),
-    },
-  });
+  lobby: {
+    createRoom: (name, navigation) => console.log("Default create room:", name),
+    joinRoom: (code, navigation) => console.log("Default join room:", code),
+  },
+});
 
 export const useLogic = () => {
   const context = useContext(LogicContext);

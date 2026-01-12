@@ -3,8 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": ["./*"],
-      "@app/ui": ["../../packages/ui/src/index.ts"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]

@@ -1,3 +1,12 @@
 {
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@app/ui/*": ["./packages/ui/src/*"],
+      "@app/core/*": ["./packages/core/src/*"],
+      "@app/api/*": ["./packages/api/src/*"],
+      "@app/config/*": ["./packages/config/src/*"]
+    }
+  }
 }

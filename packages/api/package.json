@@ -2,12 +2,22 @@
   "name": "@app/api",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@app/core": "workspace:*",
+    "@app/config": "workspace:*",
+    "@better-auth/expo": "^1.4.9",
     "@hono/node-server": "^1.19.7",
-    "hono": "^4.11.1"
+    "@prisma/adapter-pg": "^7.2.0",
+    "better-auth": "^1.4.9",
+    "hono": "^4.11.1",
+    "resend": "^6.6.0"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*"
   }
 }

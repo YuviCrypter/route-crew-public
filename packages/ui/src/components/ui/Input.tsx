@@ -35,18 +35,14 @@ export default function Input({
   ...textInputProps
 }: InputProps) {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(
-    textInputProps.textContentType !== "password",
+    textInputProps.textContentType !== "password"
   );
   return (
     <View style={[styles.container, containerStyle]}>
       {label && <Text style={[typography.label, labelStyle]}>{label}</Text>}
       <View style={[styles.inputField, error && styles.inputError]}>
         <View style={[styles.icon, { paddingRight: 0 }]}>
-          {Icon ? (
-            <Icon color={colors.textMuted} />
-          ) : (
-            <TextIcon color={colors.textMuted} />
-          )}
+          {Icon ? <Icon color={colors.textMuted} /> : <TextIcon color={colors.textMuted} />}
         </View>
 
         <TextInput
@@ -71,11 +67,7 @@ export default function Input({
           </TouchableOpacity>
         )}
       </View>
-      {error && (
-        <Text style={[typography.small, styles.errorText, errorStyle]}>
-          {error}
-        </Text>
-      )}
+      {error && <Text style={[typography.small, styles.errorText, errorStyle]}>{error}</Text>}
     </View>
   );
 }

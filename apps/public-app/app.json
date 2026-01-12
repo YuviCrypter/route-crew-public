@@ -1,12 +1,16 @@
 {
   "expo": {
-    "name": "public-app",
-    "slug": "public-app",
+    "name": "route-crew-public",
+    "slug": "route-crew-public",
     "version": "1.0.0",
+    "scheme": "rcp",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "expo": {
+      "scheme": "myapp"
+    },
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
